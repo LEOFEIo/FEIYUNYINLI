@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>飞云引力机器实验室</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",Arial,sans-serif;
+  background:#fff;
+  color:#111;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+nav{
+  height:76px;
+  padding:0 7%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid #eee;
+  background:rgba(255,255,255,.86);
+  backdrop-filter:blur(20px);
+  position:fixed;
+  top:0;
+  width:100%;
+  z-index:99;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.logo img{
+  width:42px;
+  height:42px;
+  object-fit:contain;
+}
+
+.logo-text strong{
+  font-size:18px;
+}
+
+.logo-text span{
+  display:block;
+  font-size:12px;
+  color:#777;
+  margin-top:2px;
+}
+
+.nav-links{
+  display:flex;
+  gap:42px;
+  font-size:15px;
+  color:#333;
+}
+
+.btn{
+  background:#111;
+  color:#fff;
+  padding:12px 24px;
+  border-radius:999px;
+  font-size:15px;
+}
+
+.hero{
+  min-height:100vh;
+  padding:150px 7% 80px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+  gap:60px;
+  background:
+    radial-gradient(circle at 70% 40%,#eef6ff 0%,transparent 35%),
+    linear-gradient(180deg,#fff,#f8fafc);
+}
+
+.hero h1{
+  font-size:68px;
+  line-height:1.12;
+  letter-spacing:-4px;
+  margin-bottom:28px;
+}
+
+.hero p{
+  font-size:20px;
+  line-height:1.9;
+  color:#555;
+  max-width:640px;
+  margin-bottom:34px;
+}
+
+.hero-actions{
+  display:flex;
+  gap:16px;
+}
+
+.btn-light{
+  padding:12px 24px;
+  border:1px solid #ddd;
+  border-radius:999px;
+  color:#111;
+}
+
+.robot{
+  height:540px;
+  border-radius:40px;
+  background:
+    radial-gradient(circle at 58% 32%,#111 0 7%,transparent 8%),
+    radial-gradient(circle at 58% 32%,transparent 0 12%,#3b82f6 13%,transparent 15%),
+    linear-gradient(135deg,#f8fafc,#e5e7eb 45%,#0f172a 46%,#020617);
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 40px 100px rgba(15,23,42,.08);
+}
+
+.robot::after{
+  content:"";
+  position:absolute;
+  width:150px;
+  height:150px;
+  border-radius:50%;
+  right:80px;
+  top:120px;
+  border:1px solid rgba(37,99,235,.25);
+}
+
+.section{
+  padding:95px 7%;
+  border-top:1px solid #eee;
+}
+
+.section-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  margin-bottom:42px;
+}
+
+.section h2{
+  font-size:36px;
+  letter-spacing:-2px;
+}
+
+.more{
+  color:#666;
+  font-size:15px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:12px;
+}
+
+.card{
+  border:1px solid #e8e8e8;
+  border-radius:18px;
+  padding:28px 22px;
+  min-height:190px;
+  transition:.25s;
+}
+
+.card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 20px 50px rgba(0,0,0,.06);
+}
+
+.num{
+  color:#aaa;
+  margin-bottom:28px;
+}
+
+.icon{
+  font-size:30px;
+  color:#2563eb;
+  margin-bottom:18px;
+}
+
+.card h3{
+  font-size:18px;
+  margin-bottom:12px;
+}
+
+.card p{
+  font-size:14px;
+  color:#666;
+  line-height:1.7;
+}
+
+.dark{
+  margin:0 7%;
+  padding:62px;
+  border-radius:24px;
+  background:
+    radial-gradient(circle at 85% 40%,rgba(59,130,246,.5),transparent 30%),
+    linear-gradient(135deg,#020617,#111827);
+  color:#fff;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:60px;
+}
+
+.dark h2{
+  font-size:34px;
+  line-height:1.4;
+  letter-spacing:-1px;
+}
+
+.dark p{
+  color:#cbd5e1;
+  line-height:1.9;
+}
+
+.projects{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:22px;
+}
+
+.project{
+  border:1px solid #e5e7eb;
+  border-radius:18px;
+  overflow:hidden;
+  background:#fff;
+}
+
+.project-img{
+  height:180px;
+  background:
+    radial-gradient(circle at 65% 42%,#2563eb 0 7%,transparent 8%),
+    linear-gradient(135deg,#e5e7eb,#111827);
+}
+
+.project-content{
+  padding:24px;
+}
+
+.project h3{
+  margin-bottom:12px;
+}
+
+.project p{
+  color:#666;
+  font-size:14px;
+  line-height:1.7;
+}
+
+.stats{
+  margin-top:50px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  background:#f8fafc;
+  border-radius:18px;
+  overflow:hidden;
+}
+
+.stat{
+  padding:34px;
+  text-align:center;
+  border-right:1px solid #e5e7eb;
+}
+
+.stat strong{
+  display:block;
+  font-size:40px;
+  margin-bottom:8px;
+}
+
+footer{
+  padding:60px 7%;
+  background:#f8fafc;
+  display:flex;
+  justify-content:space-between;
+  color:#666;
+}
+
+footer strong{
+  color:#111;
+}
+
+@media(max-width:1000px){
+  .hero{
+    grid-template-columns:1fr;
+  }
+
+  .grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .projects{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .dark{
+    grid-template-columns:1fr;
+  }
+
+  .nav-links{
+    display:none;
+  }
+}
+
+@media(max-width:640px){
+  .hero h1{
+    font-size:44px;
+    letter-spacing:-2px;
+  }
+
+  .grid,
+  .projects,
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  .robot{
+    height:360px;
+  }
+
+  footer{
+    flex-direction:column;
+    gap:30px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <div class="logo">
+    <img src="logo.png" alt="飞云引力 Logo">
+    <div class="logo-text">
+      <strong>飞云引力机器实验室</strong>
+      <span>FlyGravity Robotics Lab</span>
+    </div>
+  </div>
+
+  <div class="nav-links">
+    <a href="#research">研究方向</a>
+    <a href="#projects">项目案例</a>
+    <a href="#about">实验室理念</a>
+    <a href="#contact">联系我们</a>
+  </div>
+
+  <a href="#contact" class="btn">合作咨询 →</a>
+</nav>
+
+<header class="hero">
+  <div>
+    <h1>构建面向未来的<br>人机交互实验室</h1>
+    <p>
+      我们专注于 AI、机器人、Unity 交互空间与商业化设计，
+      用极简设计与智能技术连接人与机器，探索智能的无限可能。
+    </p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn">查看项目 →</a>
+      <a href="#research" class="btn-light">了解研究方向</a>
+    </div>
+  </div>
+
+  <div class="robot"></div>
+</header>
+
+<section class="section" id="research">
+  <div class="section-head">
+    <h2>研究方向</h2>
+    <a class="more">查看更多研究方向 →</a>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <div class="num">01</div>
+      <div class="icon">🤖</div>
+      <h3>机器人交互设计</h3>
+      <p>研究人与机器人之间的视觉、动作、语音与空间交互方式。</p>
+    </div>
+
+    <div class="card">
+      <div class="num">02</div>
+      <div class="icon">🧠</div>
+      <h3>AI 智能体系统</h3>
+      <p>探索大模型 Agent、自动化工作流与任务规划系统。</p>
+    </div>
+
+    <div class="card">
+      <div class="num">03</div>
+      <div class="icon">📦</div>
+      <h3>Unity 数字空间</h3>
+      <p>构建数字展厅、虚拟实验室、交互展示与沉浸式体验。</p>
+    </div>
+
+    <div class="card">
+      <div class="num">04</div>
+      <div class="icon">✍️</div>
+      <h3>机器人品牌设计</h3>
+      <p>为机器人、AI 与智能硬件公司提供品牌视觉和官网设计。</p>
+    </div>
+
+    <div class="card">
+      <div class="num">05</div>
+      <div class="icon">🛍️</div>
+      <h3>3D 电商展示</h3>
+      <p>通过 3D 可视化、交互详情页提升产品展示与转化体验。</p>
+    </div>
+
+    <div class="card">
+      <div class="num">06</div>
+      <div class="icon">📊</div>
+      <h3>数据可视化</h3>
+      <p>将复杂技术、实验数据和产品逻辑转化为清晰的视觉系统。</p>
+    </div>
+  </div>
+</section>
+
+<section class="dark" id="about">
+  <h2>智能不应该只是工具，<br>而应该像引力一样自然存在。</h2>
+  <p>
+    飞云引力希望把 AI、机器人与数字空间变成普通人可以理解、可以使用、可以体验的产品。
+    我们用设计降低技术的距离，用交互让机器更接近人。
+  </p>
+</section>
+
+<section class="section" id="projects">
+  <div class="section-head">
+    <h2>项目案例</h2>
+    <a class="more">查看全部项目 →</a>
+  </div>
+
+  <div class="projects">
+    <div class="project">
+      <div class="project-img"></div>
+      <div class="project-content">
+        <h3>AI 数字展厅</h3>
+        <p>为学校、企业与博物馆打造可交互的数字展厅和智能导览系统。</p>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-img"></div>
+      <div class="project-content">
+        <h3>机器人官网与品牌</h3>
+        <p>为机器人企业提供 Logo、官网、产品视觉、宣传图与展会设计。</p>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-img"></div>
+      <div class="project-content">
+        <h3>人机交互实验平台</h3>
+        <p>构建可测试、可演示、可展示的机器人交互实验系统。</p>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-img"></div>
+      <div class="project-content">
+        <h3>3D 电商产品展示</h3>
+        <p>让智能硬件、家具、机器人产品以更直观的方式被用户理解。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><strong>10+</strong>实验原型</div>
+    <div class="stat"><strong>20+</strong>设计方向</div>
+    <div class="stat"><strong>50+</strong>视觉方案</div>
+    <div class="stat"><strong>1</strong>未来实验室</div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div>
+    <strong>飞云引力机器实验室</strong>
+    <p>FlyGravity Robotics Lab</p>
+  </div>
+
+  <div>
+    <strong>Contact</strong>
+    <p>Email：hello@flygravity.ai</p>
+    <p>AI / Robotics / Unity / Design</p>
+  </div>
+</footer>
+
+</body>
+</html>
